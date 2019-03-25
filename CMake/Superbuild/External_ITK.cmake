@@ -28,7 +28,13 @@ if( DEFINED ${proj}_DIR AND NOT EXISTS ${${proj}_DIR} )
   message( FATAL_ERROR "${proj}_DIR variable is defined but corresponds to a nonexistent directory (${${proj}_DIR})" )
 endif( DEFINED ${proj}_DIR AND NOT EXISTS ${${proj}_DIR} )
 
-set( ${proj}_DEPENDENCIES "" )
+set( ${proj}_DEPENDENCIES )
+
+if( TubeTK_USE_GLUE )
+  set( ${proj}_DEPENDENCIES "VTK" )
+  # set( VTK_DIR "${CMAKE_CURRENT_BINARY_DIR}/VTK-build" )
+  message("${VTK_DIR}")
+endif( TubeTK_USE_GLUE )
 
 # Include dependent projects, if any.
 ExternalProject_Include_Dependencies( ${proj}
@@ -96,8 +102,13 @@ if( NOT DEFINED ${proj}_DIR AND NOT ${USE_SYSTEM_${proj}} )
       -DModule_MinimalPathExtraction:BOOL=ON
       -DKWSYS_USE_MD5:BOOL=ON
       -DModule_ITKReview:BOOL=ON
+      if (TubeTK_USE_GLUE)
+        -DModule_ITKVtkGlue:BOOL=${TubeTK_USE_GLUE}
+        -DVTK_DIR:PATH=${VTK_DIR}
+      endif()
       ${TubeTK_ITKHDF5_VALGRIND_ARGS}
-    INSTALL_COMMAND "" )
+    INSTALL_COMMAND "" 
+    DEPENDS ${${proj}_DEPENDENCIES})
 
 else( NOT DEFINED ${proj}_DIR AND NOT ${USE_SYSTEM_${proj}} )
   if( ${USE_SYSTEM_${proj}} )

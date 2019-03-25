@@ -282,6 +282,9 @@ mark_as_advanced( USE_SYSTEM_CPPCHECK )
 option( TubeTK_USE_PYTHON
  "Use Python to enable additional functionality." ON )
 
+option( TubeTK_USE_GLUE
+ "Build ITKVtkGlue Module" ON )
+
 CMAKE_DEPENDENT_OPTION( TubeTK_USE_NUMPY_STACK
   "Use NumPy to enable additional functionality." ON
   "TubeTK_USE_PYTHON" OFF )
