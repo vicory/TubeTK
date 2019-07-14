@@ -60,8 +60,8 @@ set( LIBSVM_HASH_OR_TAG 9bc3630f0f15fed7a5119c228c4d260574b4b6b2 )
 
 # Insight Segmentation and Registration Toolkit
 set( ITK_URL
-  ${github_protocol}://github.com/InsightSoftwareConsortium/ITK.git )
-set( ITK_HASH_OR_TAG v4.12.1 )
+  ${github_protocol}://github.com/vicory/ITK.git )
+set( ITK_HASH_OR_TAG 7def00aaac6031c24903911da9b301e3fa9b735d )
 
 # Slicer Execution Model
 set( SlicerExecutionModel_URL
